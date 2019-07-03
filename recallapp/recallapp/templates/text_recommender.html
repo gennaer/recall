@@ -1,0 +1,87 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="IE=edgechrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=1" name="viewport" />
+
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+
+  <title>RecAll</title>
+  </head>
+
+<body>
+  <div class="main2">
+      <h1>RecAll</h1>
+  </div>
+  
+  <div class='search_box'>
+    <form action="/text_recommender", method='POST'>
+      <p>
+        <input class="input" type="text" value="{{ medium_keywords }}" name="medium_keywords" />
+      </p>
+    </form>
+  </div>
+  <br><br>
+
+  <div class="floatLeft">
+  <table id="book-table" class="table" style="width: 400px">
+    <tr>
+    <th colspan="2">You might like these books:</th>
+    </tr>
+    {% for book in book_recs %}
+      <tr id="{{ book[0] }}">
+      <td width="30%">
+        <a href="{{ book[4] }}" target="_blank" id="book_link{{ loop.index }}">
+        <img id="book_img{{ loop.index }}" src="{{ book[1] }}" style="width:80px;height:100px;">
+        </a>
+      </td>
+      <td width="70%"><span id="book_title{{ loop.index }}">{{ book[3] }}</span>
+      <br><br>
+      <div class="buttons">
+        <button type="button" id="pb{{ loop.index }}" class="btn btn-success" onclick="updateBookRecommendation(this.id)"><img class="icon" src="../static/images/thumb-up.svg"></button>
+        <button type="button" id="nb{{ loop.index }}" class="btn btn-danger" onclick="updateBookRecommendation(this.id)"><img class="icon" src="../static/images/thumb-down.svg"></button>
+      </div>
+      </td>
+      </tr>
+    {% endfor %}
+  </table>
+  </div>
+
+  <div class="floatRight">
+  <table id="movie-table" class="table" style="width: 400px">
+    <tr>
+    <th colspan="2">You might like these movies:</th>
+    </tr>
+    {% for movie in movie_recs %}
+      <tr id="{{ movie[0] }}">
+      <td width="30%">
+        <a href="{{ movie[4] }}" target="_blank" id="movie_link{{ loop.index }}">
+        <img id="movie_img{{ loop.index }}" src="{{ movie[1] }}" style="width:80px;height:100px;">
+        </a>
+      </td>
+      <td width="70%"><span id="movie_title{{ loop.index }}">{{ movie[3] }}</span>
+      <br><br>
+      <div class="buttons">
+        <button type="button" id="pm{{ loop.index }}" class="btn btn-success" onclick="updateMovieRecommendation(this.id)"><img class="icon" src="../static/images/thumb-up.svg"></button>
+        <button type="button" id="nm{{ loop.index }}" class="btn btn-danger" onclick="updateMovieRecommendation(this.id)"><img class="icon" src="../static/images/thumb-down.svg"></button>
+      </div>
+      </td>
+      </tr>
+      {% endfor %}
+  </table>
+  </div>
+
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="static/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../static/js/utils.js"></script>
+
+</body>
+</html>
